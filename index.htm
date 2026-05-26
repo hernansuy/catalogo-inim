@@ -305,6 +305,43 @@ body {
 }
 </style>
 
+
+<style>
+.card-img,
+.modal-img{
+  position:relative !important;
+}
+
+.card-img::after{
+  content:"Click para ampliar";
+  position:absolute;
+  left:50%;
+  bottom:8px;
+  transform:translateX(-50%);
+  background:rgba(14,66,120,.94);
+  color:#fff;
+  padding:5px 12px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:700;
+  line-height:1;
+  letter-spacing:.2px;
+  white-space:nowrap;
+  pointer-events:none;
+  box-shadow:0 4px 14px rgba(0,0,0,.18);
+  z-index:5;
+}
+
+.price-note{
+  display:inline-block;
+  font-size:11px !important;
+  font-weight:700 !important;
+  color:#6b7280 !important;
+  margin-left:8px;
+  white-space:nowrap;
+}
+</style>
+
 </head>
 <body>
 
@@ -418,7 +455,7 @@ function render() {
               <div class="card-desc">${p.desc}</div>
               ${p.long ? `<div class="card-long">${p.long}</div><button class="copy-btn" onclick="event.stopPropagation(); copiarDescripcionResultado(${idx})">Copiar descripción</button>` : ''}
               <div class="card-footer">
-                <div class="card-price">${p.pvp.toFixed(2)} €<span> PVP</span></div>
+                <div class="card-price">${p.pvp.toFixed(2)} €<span> PVP</span><span class="price-note">(PRECIOS PVP APROXIMADOS)</span><span class="price-note">(PRECIOS PVP APROXIMADOS)</span></div>
                 <div class="card-cat">${p.sub || p.cat}</div>
               </div>
             </div>
@@ -486,7 +523,7 @@ function renderModal(p) {
             <div class="modal-code">${p.code}</div>
             <div class="modal-id">Cód. Conjunto: ${p.id}</div>
             <div class="modal-title">${p.desc}</div>
-            <div class="modal-price">${p.pvp.toFixed(2)} €<span> PVP</span></div>
+            <div class="modal-price">${p.pvp.toFixed(2)} €<span> PVP</span><span class="price-note">(PRECIOS PVP APROXIMADOS)</span><span class="price-note">(PRECIOS PVP APROXIMADOS)</span></div>
             <div class="modal-tags">
               <span class="modal-tag">${p.cat}</span>
               ${p.sub ? `<span class="modal-tag">${p.sub}</span>` : ''}
