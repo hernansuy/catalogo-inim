@@ -455,7 +455,7 @@ function render() {
               <div class="card-desc">${p.desc}</div>
               ${p.long ? `<div class="card-long">${p.long}</div><button class="copy-btn" onclick="event.stopPropagation(); copiarDescripcionResultado(${idx})">Copiar descripción</button>` : ''}
               <div class="card-footer">
-                <div class="card-price">${p.pvp.toFixed(2)} €<span> PVP</span><span class="price-note">(PRECIOS PVP APROXIMADOS)</span><span class="price-note">(PRECIOS PVP APROXIMADOS)</span></div>
+                <div class="card-price">${p.pvp.toFixed(2)} €<span> PVP</span><span class="price-note">(PRECIOS PVP APROXIMADOS)</span><span class="price-note"> </span></div>
                 <div class="card-cat">${p.sub || p.cat}</div>
               </div>
             </div>
