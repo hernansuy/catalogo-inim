@@ -88,11 +88,11 @@ body {
 .search-box input:focus { box-shadow: 0 0 0 4px rgba(255,255,255,0.28), 0 18px 36px rgba(0,0,0,0.18); }
 .search-box input::placeholder { color: #8b96a3; }
 
-.header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 56px; }
+.header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 16px; }
 .header-title { color: #fff; font-size: 15px; font-weight: 600; white-space: nowrap; }
 .filter-toggle {
   display: inline-flex; align-items: center; gap: 10px;
-  height: 58px; padding: 0 18px;
+  height: 48px; padding: 0 18px;
   background: rgba(255,255,255,0.08);
   border: 1px solid rgba(255,255,255,0.48);
   color: #fff; border-radius: 6px;
@@ -100,6 +100,20 @@ body {
   cursor: pointer;
 }
 .filter-toggle:hover { background: rgba(255,255,255,0.15); }
+
+.lang-toggle {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 40px; padding: 0 14px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.5);
+  color: #fff; border-radius: 999px;
+  font-family: 'Kumbh Sans', sans-serif; font-weight: 700; font-size: 13px;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: all 0.2s;
+}
+.lang-toggle:hover { background: rgba(255,255,255,0.22); }
+.lang-toggle .lang-flag { font-size: 18px; line-height: 1; }
 
 .filters-wrap { background: rgba(255,255,255,0.92); border-bottom: 1px solid var(--border); }
 .filters {
@@ -491,12 +505,159 @@ const PRODUCTS = [{"id": "UMAX216", "code": "INIM-PREVIDIA216", "desc": "Central
 
 const CATS = [...new Set(PRODUCTS.map(p => p.cat))].sort();
 
+const UI = {
+  es: {
+    title: 'Catálogo de Productos PCI',
+    searchPlaceholder: 'Buscar por código, nombre o descripción del producto...',
+    categories: 'Categorías',
+    allCategories: 'Todas las categorías',
+    searchPromptTitle: 'Busca para encontrar productos',
+    searchPromptDesc: 'Utiliza el buscador para encontrar productos por código, nombre o descripción.',
+    emptyTitle: 'No se encontraron productos',
+    emptyDesc: 'Prueba con otra referencia, código, categoría o palabra de la descripción.',
+    products: 'productos',
+    product: 'producto',
+    found: 'encontrados',
+    foundSingular: 'encontrado',
+    in: 'en',
+    for: 'para',
+    cartTitle: 'Carrito de exportación',
+    cartEmpty: '0 productos seleccionados',
+    cartTotal: 'Total PVP aproximado',
+    exportExcel: 'Exportar a Excel',
+    emptyCart: 'Vaciar carrito',
+    remove: 'Quitar',
+    copyDesc: 'Copiar descripción',
+    addToCart: 'Agregar al carrito',
+    added: 'Añadido',
+    noImage: 'Sin imagen',
+    clickToEnlarge: 'Click para ampliar',
+    pvp: 'PVP',
+    priceNote: '(PRECIOS PVP APROXIMADOS)',
+    techDesc: 'Descripción técnica',
+    includedAcc: 'Accesorios incluidos',
+    setCode: 'Cód. Conjunto',
+    descCopied: 'Descripción copiada',
+    showing: 'Mostrando',
+    of: 'de',
+    refineSearch: 'refina la búsqueda para ver más',
+    langLabel: 'IT',
+    langFlag: '🇮🇹',
+    // Excel
+    xlBrand: '  INIM',
+    xlSubtitle: '  Exportación de Carrito de Productos',
+    xlGenerated: 'Generado',
+    xlAt: 'a las',
+    xlSelected: 'seleccionados',
+    xlSelectedSingular: 'seleccionado',
+    xlRef: 'Ref.',
+    xlProduct: 'Producto',
+    xlShortDesc: 'Descripción breve',
+    xlUnitPrice: 'Precio unit.',
+    xlQty: 'Cant.',
+    xlSubtotalCol: 'Subtotal',
+    xlImage: 'Imagen',
+    xlNotes: 'Notas',
+    xlDetail: 'DETALLE',
+    xlAccessories: 'ACCESORIOS',
+    xlNoAcc: 'Sin accesorios',
+    xlProducts: 'Productos:',
+    xlAccLabel: 'Accesorios:',
+    xlTotal: 'TOTAL PVP:',
+    xlFooter: '  INIM Electronics S.r.l.  ·  Los precios PVP son aproximados y no constituyen oferta comercial vinculante.',
+    xlSheetName: 'Carrito INIM',
+    xlSee: 'Ver',
+  },
+  it: {
+    title: 'Catalogo Prodotti PCI',
+    searchPlaceholder: 'Cerca per codice, nome o descrizione del prodotto...',
+    categories: 'Categorie',
+    allCategories: 'Tutte le categorie',
+    searchPromptTitle: 'Cerca per trovare prodotti',
+    searchPromptDesc: 'Utilizza la barra di ricerca per trovare prodotti per codice, nome o descrizione.',
+    emptyTitle: 'Nessun prodotto trovato',
+    emptyDesc: 'Prova con un altro riferimento, codice, categoria o parola della descrizione.',
+    products: 'prodotti',
+    product: 'prodotto',
+    found: 'trovati',
+    foundSingular: 'trovato',
+    in: 'in',
+    for: 'per',
+    cartTitle: 'Carrello di esportazione',
+    cartEmpty: '0 prodotti selezionati',
+    cartTotal: 'Totale PVP approssimativo',
+    exportExcel: 'Esporta in Excel',
+    emptyCart: 'Svuota carrello',
+    remove: 'Rimuovi',
+    copyDesc: 'Copia descrizione',
+    addToCart: 'Aggiungi al carrello',
+    added: 'Aggiunto',
+    noImage: 'Nessuna immagine',
+    clickToEnlarge: 'Clicca per ingrandire',
+    pvp: 'PVP',
+    priceNote: '(PREZZI PVP APPROSSIMATIVI)',
+    techDesc: 'Descrizione tecnica',
+    includedAcc: 'Accessori inclusi',
+    setCode: 'Cod. Insieme',
+    descCopied: 'Descrizione copiata',
+    showing: 'Visualizzati',
+    of: 'di',
+    refineSearch: 'affina la ricerca per vederne di più',
+    langLabel: 'ES',
+    langFlag: '🇪🇸',
+    // Excel
+    xlBrand: '  INIM',
+    xlSubtitle: '  Esportazione Carrello Prodotti',
+    xlGenerated: 'Generato',
+    xlAt: 'alle',
+    xlSelected: 'selezionati',
+    xlSelectedSingular: 'selezionato',
+    xlRef: 'Rif.',
+    xlProduct: 'Prodotto',
+    xlShortDesc: 'Descrizione breve',
+    xlUnitPrice: 'Prezzo unit.',
+    xlQty: 'Qtà',
+    xlSubtotalCol: 'Subtotale',
+    xlImage: 'Immagine',
+    xlNotes: 'Note',
+    xlDetail: 'DETTAGLIO',
+    xlAccessories: 'ACCESSORI',
+    xlNoAcc: 'Nessun accessorio',
+    xlProducts: 'Prodotti:',
+    xlAccLabel: 'Accessori:',
+    xlTotal: 'TOTALE PVP:',
+    xlFooter: '  INIM Electronics S.r.l.  ·  I prezzi PVP sono approssimativi e non costituiscono offerta commerciale vincolante.',
+    xlSheetName: 'Carrello INIM',
+    xlSee: 'Vedi',
+  }
+};
+
+function T(key){ return UI[state.lang][key] || UI.es[key] || key; }
+function isIT(){ return state.lang === 'it'; }
+function pDesc(p){ return isIT() ? (p.desc_it || p.desc) : p.desc; }
+function pLong(p){ return isIT() ? (p.long_it || p.long) : p.long; }
+function pCat(p){ return isIT() ? (p.cat_it || p.cat) : p.cat; }
+function pSub(p){ return isIT() ? (p.sub_it || p.sub) : p.sub; }
+function accDesc(a){ return isIT() ? (a.desc_it || a.desc) : a.desc; }
+function catLabel(c){
+  if(!isIT()) return c;
+  const sample = PRODUCTS.find(p => p.cat === c);
+  return sample && sample.cat_it ? sample.cat_it : c;
+}
+
+function toggleLang(){
+  state.lang = state.lang === 'es' ? 'it' : 'es';
+  render();
+  document.getElementById('searchInput').focus();
+}
+
 let state = {
   search: '',
   cat: '',
   selected: null,
   filtersOpen: false,
   cart: [],
+  lang: 'es',
 };
 
 function normalize(s) {
@@ -705,29 +866,27 @@ function renderCartPanel(){
   `;
 }
 
-function limpiarCampoExcel(valor){
-  return String(valor ?? '').replace(/"/g, '""');
-}
-
 function obtenerUrlProducto(producto){
   return producto.url || producto.productUrl || producto.link || producto.href || producto.img || '';
 }
 
-const EXCEL_TEMPLATE_BASE64 = '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';
-
-function clonarProfundo(valor){
-  return valor == null ? valor : JSON.parse(JSON.stringify(valor));
-}
 
 const INIM_COLORS = {
-  blueDark: 'FF0E4278',
-  blueMid: 'FF16558F',
+  blueDark: 'FF07305A',
+  blueMid: 'FF0E4278',
+  blueAccent: 'FF16558F',
   blueLight: 'FFEAF2F8',
-  blueSoft: 'FFF1F6FB',
+  blueSoft: 'FFF5F8FC',
+  bluePale: 'FFFAFBFD',
   textDark: 'FF14385C',
   textMuted: 'FF6B7C8F',
   white: 'FFFFFFFF',
-  border: 'FFD9E4EF'
+  border: 'FFD9E4EF',
+  borderLight: 'FFECF1F7',
+  success: 'FF1A7A4D',
+  gold: 'FFBF8B2E',
+  rowEven: 'FFFFFFFF',
+  rowOdd: 'FFF7F9FC'
 };
 
 function construirTextoAdicional(producto){
@@ -743,315 +902,36 @@ function obtenerPrecioAdicional(producto){
   return producto.accessories.reduce((sum, acc) => sum + Number(acc.price || 0), 0);
 }
 
-function aplicarValorCelda(ws, direccion, valor, tipo){
-  if(!ws[direccion]) ws[direccion] = {};
-  ws[direccion].v = valor;
-  ws[direccion].t = tipo || (typeof valor === 'number' ? 'n' : 's');
-  delete ws[direccion].w;
-}
 
-function copiarCeldaPlantilla(ws, origen, destino){
-  const cell = ws[origen];
-  if(!cell) return;
-  ws[destino] = clonarProfundo(cell);
-}
 
-function asegurarEstiloCelda(ws, direccion){
-  if(!ws[direccion]) ws[direccion] = {};
-  if(!ws[direccion].s) ws[direccion].s = {};
-  return ws[direccion].s;
-}
 
-function aplicarEstiloFilaPrincipal(ws, fila){
-  ['B','C','D','E','F','G'].forEach(col => {
-    const style = asegurarEstiloCelda(ws, `${col}${fila}`);
-    style.fill = { patternType: 'solid', fgColor: { rgb: INIM_COLORS.blueLight } };
-    style.font = {
-      name: 'Kumbh Sans',
-      sz: 10,
-      bold: col !== 'G',
-      color: { rgb: col === 'G' ? INIM_COLORS.blueMid : INIM_COLORS.textDark }
-    };
-    style.alignment = {
-      vertical: 'center',
-      horizontal: ['D','E','F'].includes(col) ? 'center' : 'left',
-      wrapText: col === 'G'
-    };
-    style.border = {
-      top: { style: 'thin', color: { rgb: INIM_COLORS.border } },
-      bottom: { style: 'thin', color: { rgb: INIM_COLORS.border } }
-    };
-  });
-}
+const EURO_FMT = '#,##0.00" €"';
+const NUM_COLS = 8;
 
-function aplicarEstiloFilaDescripcion(ws, fila){
-  ['B','C','D','E','F','G'].forEach(col => {
-    const style = asegurarEstiloCelda(ws, `${col}${fila}`);
-    style.fill = { patternType: 'solid', fgColor: { rgb: INIM_COLORS.white } };
-    style.font = {
-      name: 'Kumbh Sans',
-      sz: 10,
-      bold: false,
-      color: { rgb: col === 'C' ? INIM_COLORS.textDark : INIM_COLORS.textMuted }
-    };
-    style.alignment = {
-      vertical: 'top',
-      horizontal: 'left',
-      wrapText: true
-    };
-    style.border = {
-      bottom: { style: 'thin', color: { rgb: INIM_COLORS.border } }
-    };
-  });
-}
+function xBorder(color, style){ return { style: style || 'thin', color: { rgb: color || INIM_COLORS.borderLight } }; }
+function xBorders(color, style){ const b = xBorder(color, style); return { top: b, right: b, bottom: b, left: b }; }
+function xBordersCustom(opts){ return { top: xBorder(opts.t || opts.a, opts.ts || opts.s), right: xBorder(opts.r || opts.a, opts.rs || opts.s), bottom: xBorder(opts.b || opts.a, opts.bs || opts.s), left: xBorder(opts.l || opts.a, opts.ls || opts.s) }; }
 
-function aplicarEstiloFilaAdicional(ws, fila, tieneContenido){
-  ['B','C','D','E','F','G'].forEach(col => {
-    const style = asegurarEstiloCelda(ws, `${col}${fila}`);
-    style.fill = {
-      patternType: 'solid',
-      fgColor: { rgb: tieneContenido ? INIM_COLORS.blueMid : INIM_COLORS.blueSoft }
-    };
-    style.font = {
-      name: 'Kumbh Sans',
-      sz: 10,
-      bold: col === 'B',
-      color: { rgb: tieneContenido ? INIM_COLORS.white : INIM_COLORS.textMuted }
-    };
-    style.alignment = {
-      vertical: 'center',
-      horizontal: ['D','E','F'].includes(col) ? 'center' : 'left',
-      wrapText: true
-    };
-    style.border = {
-      bottom: { style: 'medium', color: { rgb: INIM_COLORS.border } }
-    };
-  });
-}
-
-function prepararFilaDesdePlantilla(ws, filaOrigen, filaDestino){
-  for(let col = 2; col <= 7; col += 1){
-    const origen = XLSX.utils.encode_cell({r: filaOrigen - 1, c: col - 1});
-    const destino = XLSX.utils.encode_cell({r: filaDestino - 1, c: col - 1});
-    copiarCeldaPlantilla(ws, origen, destino);
-  }
-}
-
-function exportarCarritoExcel(){
-  if(!state.cart.length){
-    alert('No hay productos en el carrito.');
-    return;
-  }
-
-  if(typeof XLSX === 'undefined'){
-    alert('No se pudo cargar la librería de Excel. Recarga la página e inténtalo de nuevo.');
-    return;
-  }
-
-  const workbook = XLSX.read(EXCEL_TEMPLATE_BASE64, {
-    type: 'base64',
-    cellStyles: true
-  });
-  const sheetName = workbook.SheetNames[0];
-  const ws = workbook.Sheets[sheetName];
-  const templateRows = clonarProfundo(ws['!rows'] || []);
-  const templateRef = XLSX.utils.decode_range(ws['!ref']);
-  const lastTemplateRow = templateRef.e.r + 1;
-  ws['!cols'] = [
-    { wch: 9 },
-    { wch: 26 },
-    { wch: 74 },
-    { wch: 12 },
-    { wch: 10 },
-    { wch: 16 },
-    { wch: 40 }
-  ];
-
-  Object.keys(ws).forEach(key => {
-    if(key[0] === '!') return;
-    const row = XLSX.utils.decode_cell(key).r + 1;
-    if(row >= 5) delete ws[key];
-  });
-
-  const nuevasFilas = templateRows.slice(0, 4);
-  state.cart.forEach((producto, index) => {
-    const filaBase = 5 + (index * 3);
-    prepararFilaDesdePlantilla(ws, 5, filaBase);
-    prepararFilaDesdePlantilla(ws, 6, filaBase + 1);
-    prepararFilaDesdePlantilla(ws, 7, filaBase + 2);
-
-    nuevasFilas[filaBase - 1] = clonarProfundo(templateRows[4] || {});
-    nuevasFilas[filaBase] = clonarProfundo(templateRows[5] || {});
-    nuevasFilas[filaBase + 1] = clonarProfundo(templateRows[6] || {});
-
-    const precio = Number(producto.pvp || 0);
-    const adicionalesTexto = construirTextoAdicional(producto);
-    const precioAdicional = obtenerPrecioAdicional(producto);
-    const urlProducto = obtenerUrlProducto(producto);
-    const tieneAdicionales = Boolean(adicionalesTexto || precioAdicional > 0);
-
-    aplicarValorCelda(ws, `B${filaBase}`, producto.code || '', 's');
-    aplicarValorCelda(ws, `C${filaBase}`, producto.desc || '', 's');
-    aplicarValorCelda(ws, `D${filaBase}`, precio, 'n');
-    aplicarValorCelda(ws, `E${filaBase}`, 1, 'n');
-    aplicarValorCelda(ws, `F${filaBase}`, precio, 'n');
-    aplicarValorCelda(ws, `G${filaBase}`, urlProducto, 's');
-    if(urlProducto){
-      ws[`G${filaBase}`].l = { Target: urlProducto };
-    } else {
-      delete ws[`G${filaBase}`].l;
-    }
-
-    aplicarValorCelda(ws, `C${filaBase + 1}`, producto.long || producto.desc || '', 's');
-
-    aplicarValorCelda(ws, `B${filaBase + 2}`, adicionalesTexto, 's');
-    if(precioAdicional > 0){
-      aplicarValorCelda(ws, `D${filaBase + 2}`, precioAdicional, 'n');
-      aplicarValorCelda(ws, `E${filaBase + 2}`, 1, 'n');
-      aplicarValorCelda(ws, `F${filaBase + 2}`, precioAdicional, 'n');
-    } else {
-      aplicarValorCelda(ws, `D${filaBase + 2}`, '', 's');
-      aplicarValorCelda(ws, `E${filaBase + 2}`, '', 's');
-      aplicarValorCelda(ws, `F${filaBase + 2}`, '', 's');
-    }
-
-    aplicarEstiloFilaPrincipal(ws, filaBase);
-    aplicarEstiloFilaDescripcion(ws, filaBase + 1);
-    aplicarEstiloFilaAdicional(ws, filaBase + 2, tieneAdicionales);
-
-    nuevasFilas[filaBase - 1] = nuevasFilas[filaBase - 1] || {};
-    nuevasFilas[filaBase] = nuevasFilas[filaBase] || {};
-    nuevasFilas[filaBase + 1] = nuevasFilas[filaBase + 1] || {};
-    nuevasFilas[filaBase - 1].hpt = 24;
-    nuevasFilas[filaBase].hpt = 72;
-    nuevasFilas[filaBase + 1].hpt = 22;
-  });
-
-  ws['!rows'] = nuevasFilas;
-  ws['!ref'] = XLSX.utils.encode_range({
-    s: {r: 0, c: templateRef.s.c},
-    e: {r: (5 + (state.cart.length * 3)) - 2, c: templateRef.e.c}
-  });
-
-  for(let row = 5 + (state.cart.length * 3); row <= lastTemplateRow; row += 1){
-    for(let col = 2; col <= 7; col += 1){
-      delete ws[XLSX.utils.encode_cell({r: row - 1, c: col - 1})];
-    }
-  }
-
-  XLSX.writeFile(workbook, 'exportacion_inim_v10.xlsx', {
-    cellStyles: true,
-    bookType: 'xlsx'
-  });
-}
-
-const CLEAN_EURO_FORMAT = '#,##0.00" €"';
-
-function cleanExcelBorder(color = INIM_COLORS.border, strong = false){
-  const style = strong ? 'medium' : 'thin';
-  return {
-    top: { style, color: { rgb: color } },
-    right: { style, color: { rgb: color } },
-    bottom: { style, color: { rgb: color } },
-    left: { style, color: { rgb: color } }
-  };
-}
-
-function cleanExcelCell(value, style = {}, type){
-  const cell = {
-    v: value,
-    t: type || (typeof value === 'number' ? 'n' : 's'),
-    s: style
-  };
-  if(style.numFmt) cell.z = style.numFmt;
+function xCell(value, style, type){
+  const cell = { v: value, t: type || (typeof value === 'number' ? 'n' : 's'), s: style || {} };
+  if(style && style.numFmt) cell.z = style.numFmt;
   return cell;
 }
 
-function cleanTitleStyle(){
-  return {
-    font: { name: 'Kumbh Sans', sz: 16, bold: true, color: { rgb: INIM_COLORS.white } },
-    fill: { patternType: 'solid', fgColor: { rgb: INIM_COLORS.blueDark } },
-    alignment: { horizontal: 'left', vertical: 'center' },
-    border: cleanExcelBorder(INIM_COLORS.blueDark, true)
-  };
+function xEmptyCell(style){
+  return { v: '', t: 's', s: style || {} };
 }
 
-function cleanMetaStyle(){
-  return {
-    font: { name: 'Kumbh Sans', sz: 10, color: { rgb: INIM_COLORS.textDark } },
-    fill: { patternType: 'solid', fgColor: { rgb: INIM_COLORS.blueLight } },
-    alignment: { horizontal: 'left', vertical: 'center' },
-    border: cleanExcelBorder(INIM_COLORS.border)
-  };
+function fillRow(ws, rowIdx, numCols, style){
+  for(let c = 0; c < numCols; c++){
+    const ref = XLSX.utils.encode_cell({ r: rowIdx, c });
+    if(!ws[ref]) ws[ref] = xEmptyCell(style);
+  }
 }
 
-function cleanHeaderStyle(){
-  return {
-    font: { name: 'Kumbh Sans', sz: 10, bold: true, color: { rgb: INIM_COLORS.white } },
-    fill: { patternType: 'solid', fgColor: { rgb: INIM_COLORS.blueMid } },
-    alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
-    border: cleanExcelBorder(INIM_COLORS.blueMid, true)
-  };
-}
-
-function cleanMainStyle(horizontal = 'left'){
-  return {
-    font: { name: 'Kumbh Sans', sz: 10, bold: true, color: { rgb: INIM_COLORS.textDark } },
-    fill: { patternType: 'solid', fgColor: { rgb: INIM_COLORS.blueLight } },
-    alignment: { horizontal, vertical: 'center', wrapText: true },
-    border: cleanExcelBorder(INIM_COLORS.borderStrong || INIM_COLORS.border)
-  };
-}
-
-function cleanDescriptionLabelStyle(){
-  return {
-    font: { name: 'Kumbh Sans', sz: 9, bold: true, color: { rgb: INIM_COLORS.blueMid } },
-    fill: { patternType: 'solid', fgColor: { rgb: INIM_COLORS.blueSoft } },
-    alignment: { horizontal: 'left', vertical: 'top', wrapText: true },
-    border: cleanExcelBorder(INIM_COLORS.border)
-  };
-}
-
-function cleanDescriptionTextStyle(){
-  return {
-    font: { name: 'Kumbh Sans', sz: 10, color: { rgb: INIM_COLORS.textDark } },
-    fill: { patternType: 'solid', fgColor: { rgb: INIM_COLORS.white } },
-    alignment: { horizontal: 'left', vertical: 'top', wrapText: true },
-    border: cleanExcelBorder(INIM_COLORS.border)
-  };
-}
-
-function cleanAccessoryLabelStyle(){
-  return {
-    font: { name: 'Kumbh Sans', sz: 9, bold: true, color: { rgb: INIM_COLORS.white } },
-    fill: { patternType: 'solid', fgColor: { rgb: INIM_COLORS.blueMid } },
-    alignment: { horizontal: 'left', vertical: 'center', wrapText: true },
-    border: cleanExcelBorder(INIM_COLORS.blueMid)
-  };
-}
-
-function cleanAccessoryTextStyle(center = false){
-  return {
-    font: { name: 'Kumbh Sans', sz: 9, color: { rgb: INIM_COLORS.white }, bold: center },
-    fill: { patternType: 'solid', fgColor: { rgb: INIM_COLORS.blueMid } },
-    alignment: { horizontal: center ? 'center' : 'left', vertical: 'center', wrapText: true },
-    border: cleanExcelBorder(INIM_COLORS.blueMid),
-    numFmt: center ? CLEAN_EURO_FORMAT : undefined
-  };
-}
-
-function cleanLinkStyle(){
-  return {
-    font: { name: 'Kumbh Sans', sz: 10, bold: true, underline: true, color: { rgb: INIM_COLORS.blueMid } },
-    fill: { patternType: 'solid', fgColor: { rgb: INIM_COLORS.blueLight } },
-    alignment: { horizontal: 'center', vertical: 'center' },
-    border: cleanExcelBorder(INIM_COLORS.borderStrong || INIM_COLORS.border)
-  };
-}
-
-function cleanDescriptionHeight(text){
-  const length = String(text || '').length;
-  return Math.max(40, Math.min(108, 24 + Math.ceil(length / 95) * 16));
+function descHeight(text){
+  const len = String(text || '').length;
+  return Math.max(44, Math.min(120, 28 + Math.ceil(len / 80) * 16));
 }
 
 function exportarCarritoExcel(){
@@ -1059,87 +939,328 @@ function exportarCarritoExcel(){
     alert('No hay productos en el carrito.');
     return;
   }
-
   if(typeof XLSX === 'undefined'){
     alert('No se pudo cargar la librería de Excel. Recarga la página e inténtalo de nuevo.');
     return;
   }
 
-  const workbook = XLSX.utils.book_new();
+  const C = INIM_COLORS;
+  const wb = XLSX.utils.book_new();
   const ws = {};
   const merges = [];
   const rowInfo = [];
+  let r = 0;
 
-  ws.A1 = cleanExcelCell('INIM - Exportación de carrito', cleanTitleStyle());
-  merges.push(XLSX.utils.decode_range('A1:G1'));
-  rowInfo[0] = { hpt: 26 };
+  // ── ROW 1: Brand bar ──
+  const brandStyle = {
+    font: { name: 'Calibri', sz: 22, bold: true, color: { rgb: C.white } },
+    fill: { patternType: 'solid', fgColor: { rgb: C.blueDark } },
+    alignment: { horizontal: 'left', vertical: 'center' },
+    border: xBorders(C.blueDark, 'medium')
+  };
+  ws.A1 = xCell('  INIM', brandStyle);
+  fillRow(ws, 0, NUM_COLS, brandStyle);
+  merges.push(XLSX.utils.decode_range('A1:H1'));
+  rowInfo[r] = { hpt: 48 };
+  r++;
 
-  ws.A2 = cleanExcelCell(`Generado el ${new Date().toLocaleString('es-ES')}`, cleanMetaStyle());
-  merges.push(XLSX.utils.decode_range('A2:G2'));
-  rowInfo[1] = { hpt: 18 };
+  // ── ROW 2: Subtitle ──
+  const subtitleStyle = {
+    font: { name: 'Calibri', sz: 11, color: { rgb: C.blueAccent } },
+    fill: { patternType: 'solid', fgColor: { rgb: C.blueLight } },
+    alignment: { horizontal: 'left', vertical: 'center' },
+    border: xBordersCustom({ a: C.borderLight, b: C.border, bs: 'thin' })
+  };
+  ws[XLSX.utils.encode_cell({r,c:0})] = xCell('  Exportación de Carrito de Productos', subtitleStyle);
+  fillRow(ws, r, NUM_COLS, subtitleStyle);
+  merges.push(XLSX.utils.decode_range(`A${r+1}:H${r+1}`));
+  rowInfo[r] = { hpt: 24 };
+  r++;
 
-  const headers = ['Referencia', 'Nombre', 'Descripcion', 'Precio', 'Cantidad', 'Total', 'URL'];
-  headers.forEach((header, index) => {
-    const ref = XLSX.utils.encode_cell({ r: 3, c: index });
-    ws[ref] = cleanExcelCell(header, cleanHeaderStyle());
+  // ── ROW 3: Date + meta ──
+  const fecha = new Date().toLocaleDateString('es-ES', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+  const hora = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  const metaStyle = {
+    font: { name: 'Calibri', sz: 9, italic: true, color: { rgb: C.textMuted } },
+    fill: { patternType: 'solid', fgColor: { rgb: C.bluePale } },
+    alignment: { horizontal: 'left', vertical: 'center' },
+    border: xBordersCustom({ a: C.borderLight })
+  };
+  ws[XLSX.utils.encode_cell({r,c:0})] = xCell(`  Generado: ${fecha} a las ${hora}  ·  ${state.cart.length} producto${state.cart.length !== 1 ? 's' : ''} seleccionado${state.cart.length !== 1 ? 's' : ''}`, metaStyle);
+  fillRow(ws, r, NUM_COLS, metaStyle);
+  merges.push(XLSX.utils.decode_range(`A${r+1}:H${r+1}`));
+  rowInfo[r] = { hpt: 20 };
+  r++;
+
+  // ── ROW 4: Spacer ──
+  const spacerStyle = {
+    fill: { patternType: 'solid', fgColor: { rgb: C.white } },
+    border: { bottom: xBorder(C.border, 'thin') }
+  };
+  fillRow(ws, r, NUM_COLS, spacerStyle);
+  merges.push(XLSX.utils.decode_range(`A${r+1}:H${r+1}`));
+  rowInfo[r] = { hpt: 6 };
+  r++;
+
+  // ── ROW 5: Column headers ──
+  const headers = ['Ref.', 'Producto', 'Descripción breve', 'Precio unit.', 'Cant.', 'Subtotal', 'Imagen', 'Notas'];
+  const headerStyle = {
+    font: { name: 'Calibri', sz: 10, bold: true, color: { rgb: C.white } },
+    fill: { patternType: 'solid', fgColor: { rgb: C.blueMid } },
+    alignment: { horizontal: 'center', vertical: 'center', wrapText: true },
+    border: xBorders(C.blueDark, 'thin')
+  };
+  headers.forEach((h, i) => {
+    const style = { ...headerStyle };
+    if(i <= 2) style.alignment = { ...style.alignment, horizontal: 'left' };
+    ws[XLSX.utils.encode_cell({ r, c: i })] = xCell(h, style);
   });
-  rowInfo[3] = { hpt: 22 };
+  rowInfo[r] = { hpt: 28 };
+  const headerRow = r;
+  r++;
 
-  let row = 4;
-  state.cart.forEach(producto => {
+  // ── PRODUCT ROWS ──
+  let totalGeneral = 0;
+  let totalAccesorios = 0;
+  let itemCount = 0;
+
+  state.cart.forEach((producto, idx) => {
     const precio = Number(producto.pvp || 0);
-    const descripcion = producto.long || producto.desc || '';
+    const descripcionCorta = producto.desc || '';
+    const descripcionLarga = producto.long || producto.desc || '';
     const accesorios = construirTextoAdicional(producto);
-    const precioAccesorios = obtenerPrecioAdicional(producto);
+    const precioAcc = obtenerPrecioAdicional(producto);
     const url = obtenerUrlProducto(producto);
+    const isOdd = idx % 2 === 1;
+    const rowBg = isOdd ? C.rowOdd : C.rowEven;
+    const separatorBg = isOdd ? C.bluePale : C.blueSoft;
 
-    ws[`A${row + 1}`] = cleanExcelCell(producto.code || '', cleanMainStyle('left'));
-    ws[`B${row + 1}`] = cleanExcelCell(producto.desc || '', cleanMainStyle('left'));
-    ws[`C${row + 1}`] = cleanExcelCell(descripcion.length > 120 ? `${descripcion.slice(0, 117)}...` : descripcion, cleanMainStyle('left'));
-    ws[`D${row + 1}`] = cleanExcelCell(precio, { ...cleanMainStyle('center'), numFmt: CLEAN_EURO_FORMAT }, 'n');
-    ws[`E${row + 1}`] = cleanExcelCell(1, cleanMainStyle('center'), 'n');
-    ws[`F${row + 1}`] = cleanExcelCell(precio, { ...cleanMainStyle('center'), numFmt: CLEAN_EURO_FORMAT }, 'n');
-    ws[`G${row + 1}`] = cleanExcelCell(url ? 'Ver imagen' : '', cleanLinkStyle());
-    if(url) ws[`G${row + 1}`].l = { Target: url };
-    rowInfo[row] = { hpt: 24 };
+    totalGeneral += precio;
+    totalAccesorios += precioAcc;
+    itemCount++;
 
-    ws[`A${row + 2}`] = cleanExcelCell('DESCRIPCION', cleanDescriptionLabelStyle());
-    ws[`B${row + 2}`] = cleanExcelCell(descripcion, cleanDescriptionTextStyle());
-    merges.push(XLSX.utils.decode_range(`B${row + 2}:G${row + 2}`));
-    rowInfo[row + 1] = { hpt: cleanDescriptionHeight(descripcion) };
+    // ── Main product row ──
+    const mainBase = {
+      font: { name: 'Calibri', sz: 10, bold: true, color: { rgb: C.textDark } },
+      fill: { patternType: 'solid', fgColor: { rgb: rowBg } },
+      alignment: { horizontal: 'left', vertical: 'center', wrapText: true },
+      border: xBordersCustom({ a: C.borderLight, t: C.border, ts: 'thin' })
+    };
+    const mainCenter = { ...mainBase, alignment: { ...mainBase.alignment, horizontal: 'center' } };
+    const mainRight = { ...mainBase, alignment: { ...mainBase.alignment, horizontal: 'right' } };
 
-    if(accesorios || precioAccesorios > 0){
-      ws[`A${row + 3}`] = cleanExcelCell('ACCESORIOS', cleanAccessoryLabelStyle());
-      ws[`B${row + 3}`] = cleanExcelCell(accesorios || 'Sin accesorios', cleanAccessoryTextStyle(false));
-      merges.push(XLSX.utils.decode_range(`B${row + 3}:C${row + 3}`));
-      ws[`D${row + 3}`] = cleanExcelCell(precioAccesorios, cleanAccessoryTextStyle(true), 'n');
-      ws[`E${row + 3}`] = cleanExcelCell(precioAccesorios > 0 ? 1 : '', cleanAccessoryTextStyle(true), precioAccesorios > 0 ? 'n' : 's');
-      ws[`F${row + 3}`] = cleanExcelCell(precioAccesorios, cleanAccessoryTextStyle(true), 'n');
-      ws[`G${row + 3}`] = cleanExcelCell('', cleanAccessoryTextStyle(false));
-      rowInfo[row + 2] = { hpt: 20 };
-      row += 4;
-    } else {
-      row += 3;
+    const codeStyle = {
+      ...mainBase,
+      font: { name: 'Consolas', sz: 10, bold: true, color: { rgb: C.blueMid } }
+    };
+
+    ws[XLSX.utils.encode_cell({r, c:0})] = xCell(producto.code || '', codeStyle);
+    ws[XLSX.utils.encode_cell({r, c:1})] = xCell(descripcionCorta, mainBase);
+    ws[XLSX.utils.encode_cell({r, c:2})] = xCell(
+      descripcionLarga.length > 100 ? `${descripcionLarga.slice(0, 97)}...` : descripcionLarga,
+      { ...mainBase, font: { ...mainBase.font, bold: false, color: { rgb: C.textMuted } } }
+    );
+    ws[XLSX.utils.encode_cell({r, c:3})] = xCell(precio, { ...mainRight, numFmt: EURO_FMT }, 'n');
+    ws[XLSX.utils.encode_cell({r, c:4})] = xCell(1, mainCenter, 'n');
+    ws[XLSX.utils.encode_cell({r, c:5})] = xCell(precio, { ...mainRight, numFmt: EURO_FMT, font: { ...mainBase.font, color: { rgb: C.blueDark } } }, 'n');
+
+    const linkCell = xCell(url ? 'Ver' : '', {
+      ...mainCenter,
+      font: { name: 'Calibri', sz: 9, bold: true, underline: !!url, color: { rgb: url ? C.blueAccent : C.textMuted } }
+    });
+    if(url) linkCell.l = { Target: url };
+    ws[XLSX.utils.encode_cell({r, c:6})] = linkCell;
+    ws[XLSX.utils.encode_cell({r, c:7})] = xEmptyCell(mainBase);
+
+    rowInfo[r] = { hpt: 26 };
+    r++;
+
+    // ── Description sub-row ──
+    const descLabelStyle = {
+      font: { name: 'Calibri', sz: 8, bold: true, color: { rgb: C.blueAccent } },
+      fill: { patternType: 'solid', fgColor: { rgb: separatorBg } },
+      alignment: { horizontal: 'right', vertical: 'top', wrapText: true },
+      border: xBordersCustom({ a: C.borderLight })
+    };
+    const descTextStyle = {
+      font: { name: 'Calibri', sz: 9, color: { rgb: C.textDark } },
+      fill: { patternType: 'solid', fgColor: { rgb: separatorBg } },
+      alignment: { horizontal: 'left', vertical: 'top', wrapText: true },
+      border: xBordersCustom({ a: C.borderLight })
+    };
+
+    ws[XLSX.utils.encode_cell({r, c:0})] = xCell('DETALLE', descLabelStyle);
+    ws[XLSX.utils.encode_cell({r, c:1})] = xCell(descripcionLarga, descTextStyle);
+    for(let c = 2; c < NUM_COLS; c++) ws[XLSX.utils.encode_cell({r, c})] = xEmptyCell(descTextStyle);
+    merges.push(XLSX.utils.decode_range(`B${r+1}:H${r+1}`));
+    rowInfo[r] = { hpt: descHeight(descripcionLarga) };
+    r++;
+
+    // ── Accessories sub-row ──
+    if(accesorios || precioAcc > 0){
+      const accLabelStyle = {
+        font: { name: 'Calibri', sz: 8, bold: true, color: { rgb: C.white } },
+        fill: { patternType: 'solid', fgColor: { rgb: C.blueAccent } },
+        alignment: { horizontal: 'right', vertical: 'center', wrapText: true },
+        border: xBorders(C.blueAccent, 'thin')
+      };
+      const accTextStyle = {
+        font: { name: 'Calibri', sz: 9, color: { rgb: C.white } },
+        fill: { patternType: 'solid', fgColor: { rgb: C.blueAccent } },
+        alignment: { horizontal: 'left', vertical: 'center', wrapText: true },
+        border: xBorders(C.blueAccent, 'thin')
+      };
+      const accNumStyle = {
+        ...accTextStyle,
+        font: { ...accTextStyle.font, bold: true },
+        alignment: { ...accTextStyle.alignment, horizontal: 'right' },
+        numFmt: EURO_FMT
+      };
+
+      ws[XLSX.utils.encode_cell({r, c:0})] = xCell('ACCESORIOS', accLabelStyle);
+      ws[XLSX.utils.encode_cell({r, c:1})] = xCell(accesorios || 'Sin accesorios', accTextStyle);
+      ws[XLSX.utils.encode_cell({r, c:2})] = xEmptyCell(accTextStyle);
+      merges.push(XLSX.utils.decode_range(`B${r+1}:C${r+1}`));
+      ws[XLSX.utils.encode_cell({r, c:3})] = xCell(precioAcc, accNumStyle, 'n');
+      ws[XLSX.utils.encode_cell({r, c:4})] = xCell(precioAcc > 0 ? 1 : '', { ...accTextStyle, alignment: { ...accTextStyle.alignment, horizontal: 'center' } }, precioAcc > 0 ? 'n' : 's');
+      ws[XLSX.utils.encode_cell({r, c:5})] = xCell(precioAcc, accNumStyle, 'n');
+      ws[XLSX.utils.encode_cell({r, c:6})] = xEmptyCell(accTextStyle);
+      ws[XLSX.utils.encode_cell({r, c:7})] = xEmptyCell(accTextStyle);
+      rowInfo[r] = { hpt: 22 };
+      r++;
     }
+
+    // ── Thin separator between products ──
+    const sepStyle = {
+      fill: { patternType: 'solid', fgColor: { rgb: C.white } },
+      border: { bottom: xBorder(C.border, 'thin') }
+    };
+    fillRow(ws, r, NUM_COLS, sepStyle);
+    merges.push(XLSX.utils.decode_range(`A${r+1}:H${r+1}`));
+    rowInfo[r] = { hpt: 4 };
+    r++;
   });
 
-  ws['!ref'] = XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: row - 1, c: 6 } });
+  // ── SPACER before totals ──
+  const preTotalSpacer = {
+    fill: { patternType: 'solid', fgColor: { rgb: C.white } },
+    border: {}
+  };
+  fillRow(ws, r, NUM_COLS, preTotalSpacer);
+  merges.push(XLSX.utils.decode_range(`A${r+1}:H${r+1}`));
+  rowInfo[r] = { hpt: 10 };
+  r++;
+
+  // ── SUMMARY: Items count ──
+  const summaryLabelStyle = {
+    font: { name: 'Calibri', sz: 10, bold: true, color: { rgb: C.textDark } },
+    fill: { patternType: 'solid', fgColor: { rgb: C.blueLight } },
+    alignment: { horizontal: 'right', vertical: 'center' },
+    border: xBordersCustom({ a: C.borderLight, t: C.blueMid, ts: 'medium' })
+  };
+  const summaryValStyle = {
+    font: { name: 'Calibri', sz: 10, bold: true, color: { rgb: C.blueMid } },
+    fill: { patternType: 'solid', fgColor: { rgb: C.blueLight } },
+    alignment: { horizontal: 'right', vertical: 'center' },
+    border: xBordersCustom({ a: C.borderLight, t: C.blueMid, ts: 'medium' }),
+    numFmt: EURO_FMT
+  };
+  const emptySummary = {
+    fill: { patternType: 'solid', fgColor: { rgb: C.blueLight } },
+    border: xBordersCustom({ a: C.borderLight, t: C.blueMid, ts: 'medium' })
+  };
+
+  fillRow(ws, r, NUM_COLS, emptySummary);
+  ws[XLSX.utils.encode_cell({r, c:3})] = xCell('Productos:', summaryLabelStyle);
+  ws[XLSX.utils.encode_cell({r, c:4})] = xCell(itemCount, { ...summaryValStyle, alignment: { horizontal: 'center', vertical: 'center' } }, 'n');
+  ws[XLSX.utils.encode_cell({r, c:5})] = xCell(totalGeneral, summaryValStyle, 'n');
+  merges.push(XLSX.utils.decode_range(`A${r+1}:C${r+1}`));
+  rowInfo[r] = { hpt: 24 };
+  r++;
+
+  // ── SUMMARY: Accessories total ──
+  if(totalAccesorios > 0){
+    const accSumStyle = {
+      fill: { patternType: 'solid', fgColor: { rgb: C.blueLight } },
+      border: xBordersCustom({ a: C.borderLight })
+    };
+    fillRow(ws, r, NUM_COLS, accSumStyle);
+    ws[XLSX.utils.encode_cell({r, c:3})] = xCell('Accesorios:', { ...summaryLabelStyle, border: xBordersCustom({ a: C.borderLight }) });
+    ws[XLSX.utils.encode_cell({r, c:4})] = xEmptyCell(accSumStyle);
+    ws[XLSX.utils.encode_cell({r, c:5})] = xCell(totalAccesorios, { ...summaryValStyle, border: xBordersCustom({ a: C.borderLight }) }, 'n');
+    merges.push(XLSX.utils.decode_range(`A${r+1}:C${r+1}`));
+    rowInfo[r] = { hpt: 22 };
+    r++;
+  }
+
+  // ── SUMMARY: Grand total ──
+  const totalLabelStyle = {
+    font: { name: 'Calibri', sz: 13, bold: true, color: { rgb: C.white } },
+    fill: { patternType: 'solid', fgColor: { rgb: C.blueDark } },
+    alignment: { horizontal: 'right', vertical: 'center' },
+    border: xBorders(C.blueDark, 'medium')
+  };
+  const totalValStyle = {
+    font: { name: 'Calibri', sz: 13, bold: true, color: { rgb: C.white } },
+    fill: { patternType: 'solid', fgColor: { rgb: C.blueDark } },
+    alignment: { horizontal: 'right', vertical: 'center' },
+    border: xBorders(C.blueDark, 'medium'),
+    numFmt: EURO_FMT
+  };
+  const emptyTotal = {
+    fill: { patternType: 'solid', fgColor: { rgb: C.blueDark } },
+    border: xBorders(C.blueDark, 'medium')
+  };
+
+  fillRow(ws, r, NUM_COLS, emptyTotal);
+  ws[XLSX.utils.encode_cell({r, c:3})] = xCell('TOTAL PVP:', totalLabelStyle);
+  ws[XLSX.utils.encode_cell({r, c:4})] = xEmptyCell(emptyTotal);
+  ws[XLSX.utils.encode_cell({r, c:5})] = xCell(totalGeneral + totalAccesorios, totalValStyle, 'n');
+  merges.push(XLSX.utils.decode_range(`A${r+1}:C${r+1}`));
+  merges.push(XLSX.utils.decode_range(`F${r+1}:H${r+1}`));
+  rowInfo[r] = { hpt: 32 };
+  r++;
+
+  // ── Spacer ──
+  fillRow(ws, r, NUM_COLS, { fill: { patternType: 'solid', fgColor: { rgb: C.white } } });
+  merges.push(XLSX.utils.decode_range(`A${r+1}:H${r+1}`));
+  rowInfo[r] = { hpt: 8 };
+  r++;
+
+  // ── FOOTER ──
+  const footerStyle = {
+    font: { name: 'Calibri', sz: 8, italic: true, color: { rgb: C.textMuted } },
+    fill: { patternType: 'solid', fgColor: { rgb: C.bluePale } },
+    alignment: { horizontal: 'left', vertical: 'center' },
+    border: xBordersCustom({ a: C.borderLight, t: C.border, ts: 'thin' })
+  };
+  ws[XLSX.utils.encode_cell({r, c:0})] = xCell('  INIM Electronics S.r.l.  ·  Los precios PVP son aproximados y no constituyen oferta comercial vinculante.', footerStyle);
+  fillRow(ws, r, NUM_COLS, footerStyle);
+  merges.push(XLSX.utils.decode_range(`A${r+1}:H${r+1}`));
+  rowInfo[r] = { hpt: 18 };
+  r++;
+
+  // ── Sheet config ──
+  ws['!ref'] = XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: r - 1, c: NUM_COLS - 1 } });
   ws['!merges'] = merges;
   ws['!rows'] = rowInfo;
   ws['!cols'] = [
-    { wch: 24 },
-    { wch: 38 },
-    { wch: 62 },
+    { wch: 16 },
+    { wch: 34 },
+    { wch: 48 },
     { wch: 14 },
+    { wch: 8 },
+    { wch: 16 },
     { wch: 10 },
-    { wch: 14 },
-    { wch: 14 }
+    { wch: 18 }
   ];
-  ws['!freeze'] = { xSplit: 0, ySplit: 4, topLeftCell: 'A5', activePane: 'bottomLeft', state: 'frozen' };
-  ws['!autofilter'] = { ref: 'A4:G4' };
+  ws['!freeze'] = { xSplit: 0, ySplit: headerRow + 1, topLeftCell: `A${headerRow + 2}`, activePane: 'bottomLeft', state: 'frozen' };
+  ws['!autofilter'] = { ref: `A${headerRow + 1}:H${headerRow + 1}` };
 
-  XLSX.utils.book_append_sheet(workbook, ws, 'Carrito INIM');
-  XLSX.writeFile(workbook, 'exportacion_inim_v10.xlsx', {
+  XLSX.utils.book_append_sheet(wb, ws, 'Carrito INIM');
+
+  const ts = new Date().toISOString().slice(0,10);
+  XLSX.writeFile(wb, `INIM_carrito_${ts}.xlsx`, {
     cellStyles: true,
     bookType: 'xlsx'
   });
