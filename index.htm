@@ -157,8 +157,8 @@ body {
   box-shadow: 0 10px 26px rgba(14,66,120,0.06);
 }
 .card:hover { border-color: var(--inim-blue); transform: translateY(-2px); box-shadow: var(--shadow); }
-.card-img { width: 170px; min-width: 170px; min-height: 138px; background: linear-gradient(135deg,#f8fbfd,#eaf2f8); display: flex; align-items: center; justify-content: center; overflow: hidden; }
-.card-img img { max-width: 145px; max-height: 120px; object-fit: contain; }
+.card-img { width: 255px; min-width: 255px; min-height: 207px; background: linear-gradient(135deg,#f8fbfd,#eaf2f8); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.card-img img { max-width: 218px; max-height: 180px; object-fit: contain; }
 .card-img .no-img { color: var(--text2); font-size: 12px; }
 .card-body { padding: 16px 20px; flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .card-top { display: flex; align-items: baseline; gap: 10px; margin-bottom: 6px; flex-wrap: wrap; }
@@ -371,17 +371,17 @@ body {
   display:flex;
   align-items:center;
   justify-content:center;
-  width:170px;
-  min-width:170px;
-  min-height:138px;
+  width:255px;
+  min-width:255px;
+  min-height:207px;
   background:linear-gradient(135deg,#f8fbfd,#eaf2f8);
   overflow:hidden;
   text-decoration:none;
 }
 
 .card-img-link img{
-  max-width:145px;
-  max-height:120px;
+  max-width:218px;
+  max-height:180px;
   object-fit:contain;
 }
 
@@ -407,23 +407,39 @@ body {
 
 .cart-actions{
   display:flex;
-  gap:8px;
+  gap:10px;
+  align-items:stretch;
   flex-wrap:wrap;
   margin-top:12px;
 }
 
-.cart-btn,
-.add-cart-btn{
-  background:#0E4278;
-  color:#fff;
-  border:none;
-  padding:10px 14px;
+.cart-actions .copy-btn,
+.cart-actions .add-cart-btn{
+  margin-top:0;
+  align-self:auto;
+  height:42px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding:0 20px;
   border-radius:8px;
   font-family:'Kumbh Sans', sans-serif;
   font-size:13px;
   font-weight:700;
+  border:none;
   cursor:pointer !important;
   transition:all .2s ease;
+  white-space:nowrap;
+}
+
+.cart-actions .copy-btn{
+  background:#0E4278;
+  color:#fff;
+}
+
+.cart-actions .add-cart-btn{
+  background:#0E4278;
+  color:#fff;
 }
 
 .cart-btn:hover,
